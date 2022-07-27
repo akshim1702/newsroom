@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div class="d-flex">
+  <div class="sidebar-settings col-lg-2">
+    <div class="d-flex sidebar-settings-head">
+      <h1>Settings</h1>
+    </div>
+    <div class="sidebar-settings-sec1" id="settings-div">
+      <div class="sidebar-settings-body d-flex" tabindex="1">
+        <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+        <p class="text-sidebar-settings">Manage Permission</p>
+      </div>
+    </div>
+  </div>
+  <div class="centerBar" *ngIf="showTable">
+    <table class="table mt-3 colorDesg2">
+      <thead class="headerColor">
+        <tr>
+          <th scope="col">UserName</th>
+          <th scope="col">ChannelName</th>
+          <th scope="col">PermissionName</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody class="bodytable" *ngFor="let item of userData">
+        <tr >
+          <td
+            data-bs-toggle="modal"
+            id="id"
+            data-bs-target="#exampleModal1"
+            scope="row"
+            class="rowName"
+          >{{item.firstname}}</td>
+          <td
+            data-bs-toggle="modal"
+            id="statusId"
+            data-bs-target="#exampleModal1"
+            scope="row"
+            class="rowName"
+          >Sony</td>
+          <td data-bs-toggle="modal" data-bs-target="#exampleModal1">{{item.roleType}}</td>
+          <td>
+            <div class="d-flex dropdown">
+                <i class="fa fa-pencil-square-o edIcon" aria-hidden="true" (click)="clkEdit(item)"></i>
+                <i class="fa fa-trash-o edIcon" aria-hidden="true"></i>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="centerBar1" *ngIf="showEdit">
+    <form [formGroup]="insertSetting" >
+        <div class="modal-body modal-dialog-scrollable d-flex">
+              <div class="date" style="margin-right: 1rem; width: 50%">
+                <p>userId*:</p>
+                <input
+                  class="form-control inputData" formControlName="userId" type="text" />
+              </div>
+              <div class="time" style="margin-left: 1rem; width: 50%">
+                <p>roleId*:</p>
+                <input class="form-control inputData" formControlName="roleId" type="text" />
+              </div>
+            </div>
+        <button type="submit" class="btn btn-grey cancelBtn" id="closeBtn" (click)="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="cursor:pointer;" (click)="submitClk()">Submit</button>
+      </form>
+  </div>
+</div>
+
+<!-- username,channelname,permissionname -->

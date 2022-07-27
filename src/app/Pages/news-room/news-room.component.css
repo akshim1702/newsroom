@@ -1,0 +1,649 @@
+body {
+  background-color: #141414;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.card {
+  padding: 0.6rem;
+  border: 1px solid white;
+  height: 100%;
+}
+
+hr {
+  height: 2px;
+  background-color: #303334;
+  box-shadow: 0 1px 1px 0 rgb(220 220 220 / 30%);
+}
+
+.sidebarDesg {}
+
+.recurrenceShow {
+  display: block;
+}
+
+
+.sidebarSec1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebarSec1 button {
+  width: 100%;
+}
+
+.sidebarSec2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.sidebarSec2 input {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: white;
+  background-color: var(--leftsideSearch);
+  color: var(--leftsideSearchColor);
+}
+
+.sidebarSec2 input::placeholder {
+  color: rgb(193, 187, 187);
+}
+
+.sidebarSec3 {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 50vh;
+
+}
+
+.sidebarSec3Content {
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.weekName:hover {
+  height: 25px;
+  width: 25px;
+  background-color: #7a34eb;
+  border-radius: -75%;
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.sidebarSec3Content>div {
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  border-bottom: 1px solid rgba(114, 109, 109, 0.759);
+  padding: 5px;
+  width: 98%;
+}
+
+.sidebarSec3ContentHeading h3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 240px;
+  padding-right: 5px;
+  height: 1.2em;
+  white-space: nowrap;
+}
+
+.sidebarSec3Content {}
+
+.correct {
+  background-color: aqua;
+}
+
+.newRundownBtn button {
+  font-size: 12px;
+  font-weight: bolder;
+  width: 100%;
+}
+
+.newRundownBtn1>button {
+  font-size: 0.9rem;
+  width: 100%;
+
+}
+
+.inputLeftSearcchDesg::placeholder {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1450px) {
+  .newRundownBtn button {
+    font-size: 10px;
+    width: 100%;
+
+  }
+
+  .newRundownBtn1 button {
+    font-size: 10px;
+    width: 100%;
+
+  }
+
+  .inputLeftSearcchDesg::placeholder {
+    font-size: 12px;
+  }
+}
+
+.textContent {
+  text-align: center;
+  margin-top: 20%;
+  position: absolute;
+  color: var(--color1);
+  top: 0;
+}
+
+.datf {
+  display: flex;
+  width: 100%;
+}
+
+.inputData {
+  width: 95%;
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+.inputRecurrence {
+  height: 38px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inputRecurrence:hover {
+  border-color: #0d6efd;
+}
+
+.date {
+  width: 32%;
+}
+
+.time {
+  width: 32%;
+}
+
+.format {
+  width: 32%;
+}
+
+.selectedGraphcs:active {
+  opacity: 0.8;
+  border: 2px solid rgb(67, 213, 232);
+}
+
+.modal-footer {
+  display: block;
+}
+
+.modal-content {
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+.modal_text {
+  width: 100%;
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+#accordioncol {
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+.weekName {
+  list-style: none;
+  margin: 2%;
+}
+
+.navbar-brand {
+  display: block;
+}
+
+.colorDesg {
+  background-color: var(--themeColor);
+  color: white !important;
+}
+
+.colorDesgWhite {
+  background-color: pink;
+  color: black !important;
+}
+
+.colorDesg .row {
+  --bs-gutter-x: 0rem;
+}
+
+.colorDesg1 {
+  background-color: var(--leftsideGrid);
+  color: var(--leftsideGridColor);
+}
+
+.colorDesg2 {
+  background-color: var(--themeColor);
+  color: var(--color1) !important;
+}
+
+.searchInputIcon {
+  position: relative;
+  /* left: 0; */
+  right: 25px;
+  bottom: 2px;
+  /* top: 0; */
+  color: rgb(193, 187, 187);
+}
+
+.bg-dark {}
+
+.colorDesg {}
+
+/*  */
+
+.barDesg h4 {
+  margin-right: 50%;
+}
+
+.headerColor {
+  background-color: var(--tableHeaderBackgroundColor);
+  color: var(--tableHeaderColor);
+}
+
+table> :not(:first-child) {
+  border-top: 1px solid var(--tr-border) !important;
+  background: var(--tr-container);
+}
+
+.bodytable tr {}
+
+.bodytable :hover {
+  background-color: var(--table-row-hover-color);
+}
+
+.anchorDesg {
+  text-decoration: none;
+  color: var(--color1);
+}
+
+.buttonDesg {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.listgrid {
+  border-left: 5px solid #35abe2;
+  background: var(--leftsidePopup);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 2%);
+}
+
+.dropdown ul:hover {
+  background-color: var(--leftsideSearch) !important;
+  color: var(--color1);
+}
+
+.dropdown ul {
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+.dropdown-menu {
+  padding: 0 !important;
+}
+
+.dropdown ul li a:hover {
+  background-color: #f8f8f8 !important;
+  color: black;
+}
+
+.dropdown ul li a {
+  background-color: var(--leftsideSearch) !important;
+  border-bottom: 1px solid #6b6f71;
+  color: var(--color1);
+}
+
+.buttonDesg input::placeholder {
+  color: rgb(193, 187, 187);
+}
+
+.buttonDesg input {}
+
+.sidebarSec3Content {
+  height: 70vh;
+}
+
+.colorDesg1 {
+  height: auto;
+}
+
+#dropdownMenuLink {
+  color: #65696b;
+}
+
+.dropdown-menu {
+  padding: 0 !important;
+}
+
+thead th {
+  cursor: pointer;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+thead th span {
+  visibility: hidden;
+}
+
+thead th.active {
+  color: var(--color1);
+}
+
+thead th.active span {
+  visibility: visible;
+}
+
+::ng-deep .cdk-drag-preview {
+  display: table;
+  background-color: var(--leftsideSearch);
+  border: 2px solid #35abe2;
+  color: var(--color1);
+  cursor: move;
+}
+
+::ng-deep .cdk-drag-placeholder {
+  opacity: 0;
+  cursor: move;
+}
+
+.editInput {
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+#leftsideDropdown {
+  height: 15px;
+  opacity: 0.5;
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+#modalOpen {
+  line-height: 24px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dropdwonDesg li {
+  border-bottom: 1px var(--color1);
+}
+
+.dropdwonDesg {
+  min-width: 0 !important;
+}
+
+.modal-content {}
+
+.importRundown {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownDesg {
+  background-color: var(--leftsideGrid);
+  color: var(--color1) !important;
+}
+
+.dropdownDesg button {
+  color: var(--color1) !important;
+}
+
+.dropdownDesg button:hover {
+  color: black !important;
+}
+
+.iconDesgDropdown {
+  position: relative;
+}
+
+table thead tr th {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+table tbody tr td,
+table tbody tr th {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.closeButton {
+  background-color: white;
+}
+
+.fontDesg {
+  font-weight: normal;
+}
+
+.mainContentDontDesg {
+  margin-left: 10px;
+  text-transform: ellipsis;
+  font-size: 1.6em;
+}
+
+.searchInContent {
+  font-size: 18px;
+  color: var(--button-color2);
+  background-color: var(--leftsideSearch);
+  padding: 0.23rem 0.75rem;
+}
+
+.searchInContent::placeholder {
+  color: var(--button-color2) !important;
+}
+
+.btn-desg1 {
+  color: var(--button-color2);
+  border-color: var(--button-color);
+}
+
+.btn-desg1:hover {
+  color: var(--button-color3);
+  background-color: var(--button-color2);
+  border-color: var(--button-color);
+}
+
+.btn-dark {
+  background-color: var(--leftsideSearch);
+  color: var(--leftsideSearchColor);
+}
+
+.btn-design2:hover {
+  background-color: var(--leftsideSearch);
+  color: var(--leftsideSearchColor);
+  border-color: white;
+}
+
+.btn-design2 {
+  background-color: var(--leftsideSearch);
+  color: var(--leftsideSearchColor);
+  border-color: black;
+}
+
+.dropdown-item ul a {
+  background-color: #35abe2;
+}
+
+@media (min-width: 576px) {
+
+  #dialog1 {
+    max-width: 94%;
+    margin: 1.75rem auto;
+  }
+}
+
+element.style {}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+::ng-deep ul>li:not(.active)>a {
+  color: var(--color1);
+}
+
+::ng-deep ul>li:not(.active)>a:hover {
+  color: black !important;
+}
+
+::ng-deep .ngx-pagination .disabled {
+  color: var(--paginationColor) !important;
+}
+
+.modal:nth-of-type(even) {
+  z-index: 1052 !important;
+}
+
+.modal-backdrop.show:nth-of-type(even) {
+  z-index: 1051 !important;
+}
+
+.diplayHidden {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.graphicsSelect {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.card-video {
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+  box-shadow: rgba(99, 99, 99, 1) 0px 2px 8px 0px;
+  border: none;
+}
+
+.videoSec2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.videoSec2 input {
+  width: 100%;
+  background-color: var(--leftsideSearch);
+  color: var(--leftsideSearchColor);
+}
+
+.videoList {
+  border-left: 5px solid #35abe2 !important;
+  background: var(--leftsidePopup);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 2%);
+}
+
+
+.sidebarSec2-prompter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%
+}
+
+
+.gfxStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+  background-color: var(--themeColor);
+}
+
+.videoStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+  background-color: var(--themeColor);
+}
+
+.videoBody {
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+}
+
+
+.startOnStyle {
+  font-size: small;
+}
+
+.videoStyle {
+  background-color: var(--themeColor);
+}
+
+.video-body-Style {
+  background-color: var(--button-color);
+  color: var(--themeColor);
+}
+
+.modal-body-video {
+  padding: 0.2rem 1rem;
+}
+.gfx-body-style {
+  background-color: var(--button-color) !important;
+  color: var(--themeColor) !important;
+}
+
+
+
+.arrangeAddButton{
+  justify-content:space-between;
+}

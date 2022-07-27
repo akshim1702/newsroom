@@ -1,0 +1,86 @@
+.sidebar-settings {
+  color: var(--leftsideGridColor);
+  /* border: 1px solid red; */
+  background-color: var(--leftsideGrid);
+  height: 100vh;
+}
+
+.sidebar-settings-head {
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.sidebar-settings-body {
+  /* justify-content: space-evenly; */
+  align-items: center;
+  padding: 15px 10px;
+  /* border: 1px solid yellow; */
+  font-size: 20px;
+}
+
+.sidebar-settings-body:focus {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.text-sidebar-settings {
+  margin-top: 1rem;
+  /* margin-right: 20px; */
+  margin-left: 10px;
+}
+
+.active {
+}
+
+.centerBar {
+  color: var(--color1) !important;
+  background-color: var(--themeColor);
+  margin: 3% 5%;
+  width: 100%;
+}
+.colorDesg2 {
+  background-color: var(--themeColor);
+  color: var(--color1) !important;
+}
+
+.headerColor {
+  background-color: var(--tableHead);
+}
+
+.dropdown {
+  text-align: center;
+}
+.edIcon {
+  font-size: x-large;
+  margin: 0% 2%;
+}
+.bodytable :hover {
+    background-color: var(--table-row-hover-color);
+    cursor: pointer;
+  }
+.rowName{
+  padding: 10px 8px;
+    color: var(--theme-color);
+    font-size: 14px;
+    font-weight: var(--fw-theme);
+}
+
+.centerBar1{
+    color: var(--color1) !important;
+     background-color: var(--themeColor);
+    margin: 3% 5%;
+    width: 100%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.inputData {
+    background-color: var(--leftsideSearch);
+    color: var(--color1);
+  }
+
+  .cancelBtn{
+    border-color: var(--color1);
+    color: var(--color1);
+    cursor: pointer;
+    margin-right: 2%;
+  }

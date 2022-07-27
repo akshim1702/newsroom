@@ -1,0 +1,57 @@
+::ng-deep .angular-editor-toolbar {
+  background-color: var(--leftsideSearch);
+
+}
+
+::ng-deep .angular-editor-button {
+  background-color: var(--leftsideSearch) !important;
+  color: var(--color1) !important;
+}
+
+::ng-deep .ae-picker-label {
+  background-color: var(--leftsideSearch) !important;
+  color: var(--color1) !important;
+
+}
+
+::ng-deep .ae-font .ae-picker-label:before {
+  background: var(--editorColor) !important;
+}
+
+::ng-deep .ae-picker-label svg {
+  background-color: var(--editorColor) !important;
+}
+
+::ng-deep .ae-font .ae-picker-label svg .ae-stroke {
+  background-color: var(--editorColor) !important;
+  stroke: var(--color1) !important;
+}
+
+::ng-deep .angular-editor .angular-editor-wrapper .angular-editor-textarea {
+  height: auto;
+  min-height: 18rem !important;
+  min-width: 30rem !important;
+}
+
+
+.modal_text {
+  width: 100%;
+  background-color: var(--leftsideSearch);
+  color: var(--color1);
+}
+
+.alignRecc {
+  justify-content: flex-start;
+}
+
+.alignRecurrence {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  font-size: 20px;
+
+}
+
+.alignLabelRecurrence {
+  font-size: 20px;
+}

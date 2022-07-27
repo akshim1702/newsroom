@@ -1,0 +1,38 @@
+<div class="d-flex alignRecc mb-3" *ngIf="showRecurrence">
+    <label for="recurrence" class="alignLabelRecurrence">Recurrence:-</label>
+    <select class="fa fa-caret-down modal_text alignRecurrence ms-3" value={{recurrenceData}}
+        aria-hidden="true" id="recurrence" style=" width: 20%;" (click)="selectedRecurrence($event)"
+        aria-label="Default select example">
+        <!-- <option value="select">Select recurrence</option> -->
+        <option value="YES">Yes</option>
+        <option value="NO">No</option>
+    </select>
+</div>
+<div>
+    <angular-editor id="editor" [placeholder]="'Enter text here...'" [(ngModel)]="this.editorStory"
+        [config]="editorConfig">
+    </angular-editor>
+
+    <button type="button" class="btn btn-primary mt-2 mb-3 mx-1" (click)="editor()" id="save" *ngIf="acceptShow">
+        Accept</button>
+    <button type="button" class="btn btn-primary mt-2 mb-3 mx-1" (click)="Done()" id="save" *ngIf="submitShow">
+        Submit</button>
+    <button type="button" class="btn btn-primary mt-2 mb-3 mx-1" data-bs-dismiss="modal" (click)="save()"
+        *ngIf="saveChanges">Save
+        changes</button>
+    <div style="float:right">
+        <button type="button" class="btn btn-primary mt-2 mb-3 mx-1" data-bs-dismiss="modal">Close</button>
+    </div>
+    <div style="float:right">
+        <button type="button" class="btn btn-danger mt-2 mb-3 mx-1" data-bs-dismiss="modal" *ngIf="rejectedBtn"
+            (click)="rejected()">Rejected</button>
+    </div>
+    <div style="float:right">
+        <button type="button" class="btn btn-primary mt-2 mb-3 mx-1" data-bs-dismiss="modal" *ngIf="CompleteBtn"
+            (click)="completed()">Completed</button>
+    </div>
+    <div style="float:right">
+        <button type="button" class="btn btn-danger mt-2 mb-3 mx-1" data-bs-dismiss="modal" *ngIf="reassignBtn"
+            (click)="reassign()">Reassign</button>
+    </div>
+</div>

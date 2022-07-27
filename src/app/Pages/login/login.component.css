@@ -1,0 +1,43 @@
+
+.card {
+    position: relative;
+    width: 40rem;
+    display: block;
+    margin: 8% auto;
+    width: 41rem;
+    /* padding: 20px; */
+    background-color: #393c3d;
+    box-shadow: 1px 5.8px 0.2px rgb(26 28 29 / 48%);
+    color: white ;
+    height: 26rem;
+}
+
+.inputTag {
+    background-color: #313536;
+    color: white;
+}
+
+.login {
+    display: block;
+    margin: 10px auto;
+    border: none;
+    border-radius: 4px;
+    background: #33a4d9;
+    -webkit-box-shadow: 0 0 4.8px 0.3px rgb(0 0 0 / 5%);
+    box-shadow: 0 0 4.8px 0.3px rgb(0 0 0 / 5%);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: .4px;
+    text-align: center;
+    padding: 8px 40px;
+
+}
+
+.forgot {
+    margin: 7px 0;
+    font-size: 16px;
+    letter-spacing: .4px;
+    display: block;
+    font-weight: 300;
+    color: #fff;
+}

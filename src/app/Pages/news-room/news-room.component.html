@@ -1,0 +1,1250 @@
+<app-header></app-header>
+<div class="content colorDesg">
+  <div class="row">
+    <div class="col-lg-2 card colorDesg1">
+      <div class="sidebarSec1">
+        <div>Rundown</div>
+        <div></div>
+      </div>
+      <hr />
+
+      <div class="sidebarSec1">
+        <div class="newRundownBtn" (click)="newRundown()">
+          <button class="btn btn-lg btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; New Rundown
+          </button>
+        </div>
+        <div class="newRundownBtn">
+          <button type="button" class="btn btn-lg ms-2 btn-dark" (click)="runDraft()" data-bs-toggle="modal"
+            data-bs-target="#dropdownBasic" id="dropdownBasic1">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Rundown Draft
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="sidebarSec2-prompter">
+        <button type="button" class="btn btn-lg btn-dark" id="dropdownBasic1" (click)="telePrompter()">
+          Teleprompter
+        </button>
+      </div>
+      <hr />
+      <div class="sidebarSec2-prompter">
+        <select class="fa fa-caret-down modal_text alignRecurrence inputRecurrence" aria-hidden="true"
+          aria-label="Default select example" (change)="selectRundownType($event)">
+          <option value="">Show All</option>
+          <option value="Rundown">Rundown</option>
+          <option value="Rundown Draft">Rundown Draft</option>
+          <option value="Recurrence">Recurrence</option>
+        </select>
+
+      </div>
+      <hr />
+      <div class="sidebarSec2">
+        <input [(ngModel)]="searchterm" type="text" class="form-control inputLeftSearcchDesg" id="leftSearch"
+          placeholder="Search for RunDown" /><span class="searchInputIcon"><i class="fa fa-search"
+            aria-hidden="true"></i></span>
+      </div>
+      <hr />
+
+      <div class="sidebarSec3">
+        <div class="sidebarSec3Content">
+          <div *ngFor="
+              let item of leftSideDataBar | filter: searchterm;
+              let i = index
+            " (click)="showTable(item, i)" [class.listgrid]="selectedIndex === i">
+            <div class="sidebarSec3ContentHeading">
+              <div class="dropdown">
+                <a class="fa anchorDesg fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false" role="button"
+                  id="leftsideDropdown">
+                </a>
+
+                <ul class="dropdown-menu dropdwonDesg" aria-labelledby="leftsideDropdown">
+                  <!-- <li>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-tasks"
+                                                aria-hidden="true"></i>Properties</a>
+                                    </li> -->
+                  <li data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="duplicateData(item)">
+                    <a class="dropdown-item"><i class="fa fa-clone" aria-hidden="true"></i>Duplicate</a>
+                  </li>
+                  <li (click)="updateLeftSideData(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update</a>
+                  </li>
+                  <li data-bs-toggle="modal">
+                    <a class="dropdown-item fa fa-calendar-check-o" (click)="recurrenceLeftSideData(item)"
+                      data-bs-toggle="modal" data-bs-target="#recurrence">Recurrence</a>
+                  </li>
+                  <li (click)="deleteLeftSide(item, $event)">
+                    <a class="dropdown-item"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                  </li>
+                </ul>
+              </div>
+              <h4 class="fontDesg">
+                {{ item.rundownName }}
+              </h4>
+            </div>
+            <div>
+              <p>
+                <span class="startOnStyle">Starts ON:</span> {{ item.date }} {{ item.creationTime }}
+              </p>
+            </div>
+            <div>
+              <p><span>Type:</span> {{ item.rundownStatus }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showContent" class="textContent">
+      <p>No Rundown to show</p>
+      <p>please select a single Rundown from the sidebar</p>
+    </div>
+    <div *ngIf="hideContent" class="col-lg-10 colorDesg2">
+      <div class="navbar navbar-light bg-transparent" *ngIf="showNavbar">
+        <div class="container-fluid">
+          <div>
+            <p class="mainContentDontDesg">
+              {{ x }}
+            </p>
+          </div>
+
+          <div *ngIf="hideContent" class="buttonDesg">
+            <div style="display: flex" *ngIf="showEdit">
+              <div style="font-size: 18px" class="mx-1 d-flex" (click)="deleteMultipleItem()">
+                <button style="font-size: 18px" class="btn btn-desg1 btn-sm" id="modalOpen" type="button">
+                  <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;({{
+                  totalCount
+                  }})&nbsp;
+                </button>
+              </div>
+              <div style="font-size: 18px" class="mx-1 d-flex" (click)="cutMultipleItem()">
+                <button style="font-size: 18px" class="btn btn-desg1 btn-sm" id="modalOpen" type="button">
+                  <i class="fa fa-scissors" aria-hidden="true"></i>&nbsp;({{
+                  totalCount
+                  }})&nbsp;
+                </button>
+              </div>
+              <div style="font-size: 18px" class="mx-1 d-flex" (click)="copyMultipleItem()">
+                <button style="font-size: 18px; margin-right: 10px" class="btn btn-desg1 btn-sm" id="modalOpen"
+                  type="button">
+                  <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;({{
+                  totalCount
+                  }})&nbsp;
+                </button>
+              </div>
+            </div>
+            <div class="mx-1" style="font-size: 18px">
+              <input [(ngModel)]="term" type="text" class="form-control searchInContent"
+                placeholder="Enter Your Search..." />
+            </div>
+            <!-- <div style="font-size:18px;" class="mx-1 d-flex">
+                            <button style="font-size:18px;" class="btn btn-desg1 btn-sm" id="modalOpen" type="button"><i
+                                    class="fa fa-database" aria-hidden="true"></i>&nbsp;Apply
+                                rules</button>
+                        </div> -->
+            <!-- <div style="font-size: 18px" class="mx-1 d-flex">
+              <button
+                style="font-size: 18px"
+                class="btn btn-desg1 btn-sm"
+                id="modalOpen"
+                type="button"
+              >
+                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Excel
+              </button>
+            </div> -->
+            <div style="font-size: 18px" class="mx-1 d-flex">
+              <button style="font-size: 18px" class="btn btn-desg1 btn-sm" id="modalOpen" type="button"
+                data-bs-toggle="modal" data-bs-target="#addData" (click)="addBtn()">
+                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Add
+              </button>
+            </div>
+            <!-- <div style="font-size:18px;" class="mx-1 d-flex">
+                            <button style="font-size:18px; margin-right:10px;" class="btn btn-desg1 btn-sm"
+                                id="modalOpen" type="button"><i class="fa fa-download"
+                                    aria-hidden="true"></i>&nbsp;EPG</button>
+                        </div> -->
+          </div>
+        </div>
+      </div>
+
+      <table *ngIf="hideTables" class="table mt-3 colorDesg2" cdkDropList [cdkDropListData]="gridDataRightSide"
+        (cdkDropListDropped)="dropData($event)">
+        <thead class="headerColor">
+          <tr>
+            <th scope="col">
+              <!-- <div class="d-flex" style="justify-content:space-evenly;">
+                                <input type="checkbox" (change)="changedAll($event)" name="selectAll" id="">
+                            </div> -->
+            </th>
+            <!-- <th [class.active]="order === 'rundownID'" (click)="sort('rundown')">
+                            Rundown Id <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+                        </th> -->
+            <th scope="col">
+              Id
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col">
+              Status
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col" (click)="sortSlugName()">
+              Slug Name
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col">
+              Slug Type
+
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col">
+              Reporter
+
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col">
+              AssignTo
+
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col">
+              Accepted by
+
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col" (click)="sortDate()">
+              Create date
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+
+        <tbody class="bodytable" *ngFor="
+            let items of gridDataRightSide
+              | paginate: { itemsPerPage: 20, currentPage: page }
+              | filter: term;
+            let i = index
+          ">
+          <tr cdkDrag>
+            <td>
+              <div class="d-flex" style="justify-content: space-evenly">
+                <div>
+                  <div style="cursor: move" cdkDragHandle>||</div>
+                </div>
+                <div style="margin-top: 0.1rem">
+                  <input (change)="changed(items, $event)" [(ngModel)]="items.checked" [value]="items.value"
+                    type="checkbox" name="SelectThisField" id="" />
+                </div>
+              </div>
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" id="id" data-bs-target="#exampleModal1"
+              scope="row">
+              {{ items.id }}
+            </td>
+            <td (click)="openEditor(i, items)" [ngStyle]="{ 'background-color': getTheColor(items.status) }"
+              style="color: black; border-color: black" data-bs-toggle="modal" id="statusId"
+              data-bs-target="#exampleModal1" scope="row">
+              {{ items.status }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.slugName }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.slugType }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.reporter }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.assignTo }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.acceptedBy }}
+            </td>
+            <td (click)="openEditor(i, items)" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              {{ items.createDate }}
+            </td>
+            <td>
+              <div class="dropdown">
+                <a class="fa anchorDesg fa-ellipsis-v" (click)="clickEllipsis(items, i, $event)"
+                  data-bs-toggle="dropdown" aria-expanded="false" href="#" role="button" id="dropdownMenuLink"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li>
+                    <a class="dropdown-item" id="modalOpen" type="button" data-bs-toggle="modal"
+                      data-bs-target="#addData" (click)="updateRightSideData(items)">Edit</a>
+                  </li>
+                  <li (click)="delete(items, $event)">
+                    <a class="dropdown-item" href="#">Delete</a>
+                  </li>
+                  <li (click)="copy(items, i, $event)">
+                    <a class="dropdown-item" href="#">Copy</a>
+                  </li>
+                  <li (click)="cut(items, i, $event)">
+                    <a class="dropdown-item" href="#">Cut</a>
+                  </li>
+                  <li data-bs-toggle="modal">
+                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addData"
+                      (click)="insertValue(items)">Insert</a>
+                  </li>
+                  <li (click)="pasteItem(items, $event)">
+                    <a class="dropdown-item" href="#" *ngIf="pasteHide">Paste</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls *ngIf="hideTables" (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<!-- Recurrence---------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- Vertically centered scrollable modal -->
+<div class="modal fade" id="recurrence" tabindex="-1" aria-labelledby="exampleModalLabelReccurence" aria-hidden="true">
+  <div>
+    <form [formGroup]="leftSideRecurrence" class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabelReccurence">
+            Recurrence
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Rundown name*:</p>
+          <input style="width: 98%" type="text" formControlName="runDownName" class="form-control modal_text" />
+          <span class="text-danger" *ngIf="
+              leftSideRecurrence.controls['runDownName'].dirty &&
+              leftSideRecurrence.hasError('required', 'runDownName')
+            ">*Required</span>
+
+          <div class="datf" style="margin-top: 1rem">
+            <div class="date" style="margin-right: 1rem; width: 50%">
+              <p>Date*:</p>
+              <input ng-model="leftSideRecurrence.rundownDate" formControlName="rundownDate" readonly
+                class="form-control inputData" type="date" />
+            </div>
+            <div class="time" style="margin-left: 1rem; width: 50%">
+              <p>Time*:</p>
+              <input readonly class="form-control inputData" formControlName="rundownCreationTime" type="text" />
+            </div>
+          </div>
+          <div class="datf" style="margin-top: 1rem">
+            <div style="width: 100%">
+              <p>Rundown Remarks*:</p>
+              <input style="width: 98%" type="text" formControlName="rundownRemarks" class="form-control modal_text" />
+              <span class="text-danger" *ngIf="
+                  leftSideRecurrence.controls['rundownRemarks'].dirty &&
+                  leftSideRecurrence.hasError('required', 'rundownRemarks')
+                ">*Required</span>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div style="width: 100%">
+              <p>Start</p>
+              <input style="width: 98%" type="date" formControlName="recurrenceStart" placeholder="Select date"
+                class="form-control modal_text" />
+            </div>
+            <div style="width: 100%">
+              <p>End</p>
+              <input style="width: 98%" type="date" placeholder="Select date" formControlName="recurrenceEnd"
+                class="form-control modal_text" />
+            </div>
+            <input style="width: 98%" type="hidden" placeholder="Select date" formControlName="recurrence"
+              class="form-control modal_text" />
+            <input style="width: 98%" type="hidden" placeholder="Select date" formControlName="recurenceType"
+              class="form-control modal_text" />
+          </div>
+          <p>Repeat every</p>
+          <!-- <div class="d-flex">
+            <select class="fa fa-caret-down modal_text" (change)="week($event)" formControlName="calendar"
+              aria-hidden="true" style="width: 50%; height: 4vh" aria-label="Default select example">
+              <option value="selectRecurrence">Select recurrence</option>
+              <option value="days">Days</option>
+              <option value="week">Week</option>
+              <option value="repeat">Does not repeat</option>
+            </select>
+          </div> -->
+          <!-- <div class="d-flex" *ngIf="weekShow">
+            <div class="weekName" (click)="days(i)" id="m" *ngFor="let name of daysName; let i = index">
+              {{ name }}
+            </div>
+          </div> -->
+          <!-- <div class="d-flex">
+            <label>Occurs</label>
+            <div *ngFor="let week of weekDays">{{ week }},</div>
+          </div> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeRecurrence" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="saveRecurrence()" >
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" ngxUiLoaderBlurred tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="leftSideRundown" class="modal-dialog">
+    <div class="modal-content" style="width: 650px; height: 520px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="showCreate">
+          Create a new Rundown
+        </h5>
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="showUpdate">
+          Update Rundown
+        </h5>
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="duplicateheading">
+          Create a duplicate Rundown
+        </h5>
+        <button id="closeButtonModel" type="button" (click)="closeNewrun()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex">
+          <div class="time" style="width: 49%; margin-bottom: 2px">
+            <div>
+              <p>Type of Recurrence*:</p>
+              <select class="fa fa-caret-down modal_text alignRecurrence inputRecurrence" aria-hidden="true"
+                id="recurrence" formControlName="recurrence" (change)="getRecurrenced($event)"
+                aria-label="Default select example">
+                <option value="NO">New</option>
+                <option value="YES">Recurrence</option>
+              </select>
+            </div>
+          </div>
+          <div class="time ms-2" style="width: 49%; margin-bottom: 2px" *ngIf="recurrenceShow">
+            <div>
+              <p>Recurrence*:</p>
+              <select class="fa fa-caret-down modal_text alignRecurrence inputRecurrence" aria-hidden="true"
+                id="recurrence" aria-label="Default select example" (change)="selectRecurrence($event)">
+                <option>Select Recurrence</option>
+                <option [value]="item.rundownId" *ngFor="let item of recurrenceData">
+                  {{ item.rundownName }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <p>Rundown name*:</p>
+        <input formControlName="runDownName" id="inputRundown" style="width: 98%" type="text"
+          class="form-control modal_text" />
+        <span class="text-danger" *ngIf="
+            leftSideRundown.controls['runDownName'].dirty &&
+            leftSideRundown.hasError('required', 'runDownName')
+          ">*Required</span>
+
+        <div class="datf" style="margin-top: 1rem">
+          <div class="date" style="margin-right: 1rem; width: 50%">
+            <p>Date*:</p>
+            <input formControlName="rundownDate" min="{{ recurrStartDate }}" max="{{ recurrEndDate }}"
+              ng-model="leftSideRundown.rundownDate" class="form-control inputData" type="date" id="selectedDate" />
+          </div>
+          <div class="time" style="margin-left: 1rem; width: 50%">
+            <p>Time*:</p>
+            <input formControlName="rundownCreationTime" minlength="0" maxlength="8" (input)="flexibleTime($event)"
+              class="form-control inputData" type="text" />
+          </div>
+        </div>
+        <div class="datf d-flex" style="margin-top: 1rem">
+          <div style="width: 49%">
+            <p>Rundown Remarks*:</p>
+            <input formControlName="rundownRemarks" id="rundownRemarks" style="width: 98%" type="text"
+              class="form-control modal_text" />
+            <span class="text-danger" *ngIf="
+                leftSideRundown.controls['rundownRemarks'].dirty &&
+                leftSideRundown.hasError('required', 'rundownRemarks')
+              ">*Required</span>
+          </div>
+          <div class="time" style="width: 49%; margin-bottom: 2px">
+            <div>
+              <p>Group*:</p>
+              <select class="fa fa-caret-down modal_text alignRecurrence inputRecurrence" aria-hidden="true"
+                id="recurrence" formControlName="pkg" aria-label="Default select example">
+                <option value="select">Select Group</option>
+                <option [value]="groupName" *ngFor="let groupName of pcrName">{{groupName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" formControlName="rundownTime" class="type" />
+      <input type="hidden" formControlName="rundownStatus" class="type" />
+      <input type="hidden" formControlName="runDownId" class="type" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="postLeftSideDetails()"
+          [disabled]="leftSideRundown.invalid" *ngIf="createShow">
+          Create
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateLeftSideDetails()" *ngIf="updateShow">
+          Update
+        </button>
+        <button type="button" class="btn btn-primary" (click)="duplicateInsert()" *ngIf="duplicateShow">
+          Created
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- editor modal box -->
+<div class="modal fade" id="exampleModal1" data-dismiss="modal" data-toggle="modal" style="overflow: hidden"
+  tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-dialog-scrollable" id="dialog1">
+    <div class="modal-content" style="width: 100%; height: auto">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ x }}</h5>
+        <button type="button" class="btn-close closeButton" id="save" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeSelectedGraphics()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="datf">
+          <div class="time" style="margin-right: 1rem; width: 50%">
+            <p>Status*:</p>
+            <input style="width: 100%; margin-bottom: 3%" [value]="this.dataAnyStatus" readonly type="text"
+              class="form-control modal_text" />
+          </div>
+          <div class="date" style="width: 50%;">
+            <p>Reporter:</p>
+            <input style="width: 100%; margin-bottom: 3%" readonly [value]="this.dataAnyReporter" type="text"
+              class="form-control modal_text" />
+          </div>
+          <div class="date" style="margin-left: 1rem; width: 50%">
+            <p>Slug Type*:</p>
+            <input style="width: 100%; margin-bottom: 3%" readonly [value]="this.dataAnySlugType" type="text"
+              class="form-control modal_text" />
+          </div>
+          <div class="time" style="margin-left: 1rem; width: 50%">
+            <p>AssignTo*:</p>
+            <input style="width: 100%; margin-bottom: 3%" readonly [value]="this.dataAnyAssign" type="text"
+              class="form-control modal_text" />
+          </div>
+          <div class="time" style="margin:0rem 1rem; width: 50%">
+            <p>SlugName*:</p>
+            <input style="width: 100%; margin-bottom: 3%" [value]="this.dataAnySlugName" readonly type="text"
+              class="form-control modal_text" />
+          </div>
+          <div class="time" style="width: 50%">
+            <p>AcceptedBy:</p>
+            <input [value]="this.dataAccepted" readonly class="form-control inputData"
+              style="width: 100%; margin-bottom: 3%" type="text" />
+          </div>
+        </div>
+
+        <div class="d-flex" style="margin: 1% 0">
+          <button type="button" class="btn btn-primary me-2" style="margin: 1%" data-bs-toggle="modal"
+            data-bs-target="#grapichsAttachment" (click)="getGraphics()" *ngIf="showGraph">
+            Graphics
+          </button>
+          <button type="button" class="btn btn-primary" style="margin: 1%" data-bs-toggle="modal"
+            data-bs-target="#videoAttachment" (click)="videoAttach()" *ngIf="showVideo">
+            Video_Attachment
+          </button>
+        </div>
+        <div class="datf" style="margin-top: 1rem" [ngClass]="
+            recurrenceCheck == 'Yes' ? 'recurrenceShow' : 'diplayHidden'
+          ">
+          <div class="date" style="width: 100%">
+            <!-- <h5 style="float: right;color:#00a6f4;">Recurrence</h5> -->
+          </div>
+        </div>
+        <div class="d-flex" style="justify-content: space">
+          <app-editor style="width: 100%" *ngFor="let editorValues of editorValue" [editorData]="editorValues"
+            (accepteName)="editor($event)">
+          </app-editor>
+          <div style="width: 30%; margin-top: 3.2rem" class="ms-2" *ngIf="showGraph">
+            <div class="gfxStyle">
+              <h1>GFX</h1>
+            </div>
+            <div class="gfxBody">
+              <div *ngIf="graphicsContent" class="textContent" style="display: contents;">
+                <p class="my-4">No Records Found</p>
+              </div>
+              <div class="accordion my-2 gfx-body-style" [attr.id]="'accordionExample' + i + 1"
+                *ngFor="let graphicsTitle of graphicsDataTitle; let i = index">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button gfx-body-style collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#collapseOne' + i + 1" aria-expanded="true">
+                      {{ graphicsTitle.title }}
+                    </button>
+                    <input type="hidden" value="{{ graphicsTitle.title }}" [attr.id]="'titleOfgraphics' + i + 1" />
+                  </h2>
+                  <div [attr.id]="'collapseOne' + i + 1" class="accordion-collapse collapse"
+                    aria-labelledby="headingOne" [attr.data-bs-parent]="'#accordionExample' + i + 1">
+                    <div class="accordion-body" id="accordioncol">
+                      <div class="panel-collapse collapse" id="div-0" style="display: block">
+                        <div class="d-flex" style="justify-content: space-evenly">
+                          <div>
+                            <div class="d-flex" *ngFor="
+                                let item of graphicsAmt;
+                                let itemIndex = index
+                              " style="
+                                margin: 1%;
+                                justify-content: space-evenly;
+                                width: 90%;
+                              " [ngClass]="{
+                                diplayHidden: !(
+                                  graphicsTitle.templateid ===
+                                    item.TemplateId &&
+                                  i + 1 == item.graphicsIndex
+                                )
+                              }">
+                              <div class="d-flex" style="margin-top: 5px; width: 100%">
+                                <label class="d-flex" style="
+                                    margin: 1%;
+                                    width: inherit;
+                                    width: 100%;
+                                    align-items: center;
+                                  " *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    i + 1 == item.graphicsIndex
+                                  ">{{ item.tpName }}</label>
+                              </div>
+                              <div class="d-flex" style="margin-top: 5px; width: 100%">
+                                <select *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    item.tpType == 'asset' &&
+                                    i + 1 == item.graphicsIndex
+                                  " class="graphicsSelect fa fa-caret-down modal_text ms-2 me-2"
+                                  [(ngModel)]="item.tpValue" type="text" id="slugDropdown" style="margin-top: 5px"
+                                  (change)="
+                                    getDataOption($event, item, itemIndex)
+                                  ">
+                                  <option *ngFor="let asset of assetsName" [value]="asset">
+                                    {{ asset }}
+                                  </option>
+                                </select>
+                                <input *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    item.tpType == 'text' &&
+                                    item.tpName != 'Font Color' &&
+                                    i + 1 == item.graphicsIndex
+                                  " type="text" class="form-control modal_text ms-2 me-2" value="{{ item.tpValue }}"
+                                  (change)="
+                                    getDataText($event, item, itemIndex)
+                                  " />
+                                <input [attr.id]="'colorId' + itemIndex" type="text" *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    item.tpName == 'Font Color' &&
+                                    item.tpType == 'text' &&
+                                    i + 1 == item.graphicsIndex
+                                  " class="form-control modal_text ms-2 me-2" value="{{ item.tpValue }}" (change)="
+                                    getDataColor($event, item, itemIndex)
+                                  " />
+                                <input type="color" *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    item.tpName == 'Font Color' &&
+                                    i + 1 == item.graphicsIndex
+                                  " id="test" class="ms-2 me-2" name="favcolor" style="margin-top: 5px"
+                                  value="{{ colorData }}" (change)="
+                                    graphicsColor($event, item, itemIndex)
+                                  " />
+                                <input *ngIf="
+                                    graphicsTitle.templateid ===
+                                      item.TemplateId &&
+                                    item.tpType == 'int' &&
+                                    i + 1 == item.graphicsIndex
+                                  " type="number" class="form-control modal_text ms-2 me-2" value="{{ item.tpValue }}"
+                                  (change)="
+                                    getDataText($event, item, itemIndex)
+                                  " />
+                              </div>
+
+                              <!-- </div> -->
+                            </div>
+                          </div>
+                          <div style="width: 50%; margin-left: 1%">
+                            <div>
+                              <p>Position</p>
+                              <div class="d-flex">
+                                <label>X</label>
+                                <input style="width: 100%; margin-bottom: 3%" placeholder="0" type="text"
+                                  class="form-control modal_text ms-2 me-2" value="{{ graphicsTitle.x }}"
+                                  (change)="getXvalue($event, graphicsTitle)" />
+                                <label>Y</label>
+                                <input style="width: 100%; margin-bottom: 3%" placeholder="0" type="text"
+                                  class="form-control modal_text ms-2" value="{{ graphicsTitle.y }}"
+                                  (change)="getYvalue($event, graphicsTitle)" />
+                              </div>
+                            </div>
+                            <div>
+                              <p>Size:</p>
+                              <div class="d-flex">
+                                <label>W</label>
+                                <input class="form-control inputData ms-2 me-2" placeholder="1920"
+                                  style="width: 100%; margin-bottom: 3%" type="text" value="{{ graphicsTitle.w }}"
+                                  (change)="getWvalue($event, graphicsTitle)" />
+                                <label>H</label>
+                                <input class="form-control inputData ms-2 me-2" placeholder="1080"
+                                  style="width: 100%; margin-bottom: 3%" type="text" value="{{ graphicsTitle.h }}"
+                                  (change)="getHvalue($event, graphicsTitle)" />
+                              </div>
+                            </div>
+                            <div class="d-flex">
+                              <div>
+                                <p>Offset Start:</p>
+                                <div>
+                                  <input class="form-control inputData" value="00:00:00" placeholder="hh:mm:ss"
+                                    (change)="getOffset($event, graphicsTitle)" style="width: 100%; margin-bottom: 3%"
+                                    type="text" />
+                                </div>
+                              </div>
+                              <div>
+                                <p>Offset End*</p>
+                                <div>
+                                  <input (change)="
+                                      getSPlDuration($event, graphicsTitle)
+                                    " class="form-control inputData" value="00:00:00" placeholder="hh:mm:ss"
+                                    style="width: 100%; margin: 5%" type="text" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width: 30%; margin-top: 3.2rem" class="ms-2" *ngIf="showVideo">
+
+            <div class="videoStyle">
+              <h1>Video</h1>
+            </div>
+            <div class="videoBody">
+              <div class="modal-body modal-body-video modal-dialog-scrollable" style="height: 300px">
+                <div *ngIf="videoContent" class="textContent" style="display: contents">
+                  <p class="my-2">No Records Found</p>
+                </div>
+                <div class="" id="accordionExample">
+                  <div class="d-flex" style="
+                      height: 50%;
+                      justify-content: space-between;
+                      flex-wrap: wrap;
+                    ">
+                    <div class="card card-video my-1 video-body-Style" style="width: 100%"
+                      *ngFor="let videoArray of videoArray; let i = index">
+                      <div class="card-body">
+                        <div class="d-flex arrangeAddButton">
+                          <h6 class="me-2">{{ videoArray.name }}</h6>
+                          <i class="fa fa-plus fa-xl" style="  cursor: pointer;
+                        " aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Graphics"
+                            (click)="addVideoArray(videoArray, i)" data-bs-toggle="modal"
+                            data-bs-target="#grapichsAttachment"></i>
+
+
+
+                        </div>
+                        <div class="d-flex arrangeAddButton" >
+                          <p class="card-text">00:00:00:00/00:00:00:00</p>
+                          <i class="fa fa-info-circle fa-xl" style="  cursor: pointer;" aria-hidden="true"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="View Graphics"
+                            (click)="viewVideoGfx(videoArray,i)" data-bs-toggle="modal"
+                            data-bs-target="#grapichsAttachment" *ngIf="showGraphEye" ></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------------------Add Modal------------------------------->
+<div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="rightSideGridData" class="modal-content" style="width: 650px; height: 480px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ x }}</h5>
+        <!-- <input type="hidden" name="leftsidebarId" formControlName="rundownId" [(ngModel)]="rundownID" [value]="this.rundownIdforAdd"> -->
+        <input type="hidden" formControlName="id" />
+        <input type="hidden" formControlName="rundownId" />
+        <input type="hidden" formControlName="gfx_attachment" />
+        <input type="hidden" formControlName="video_attachment" />
+        <input type="hidden" formControlName="remarks" />
+        <input type="hidden" formControlName="acceptedBy" />
+        <input type="hidden" formControlName="status" />
+        <input type="hidden" formControlName="reporter" />
+        <input type="hidden" formControlName="roleid" />
+
+        <button type="button" class="btn-close closeButton" id="rightSideCLose" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Slug name*:</p>
+        <input style="width: 100%" formControlName="slugName" type="text" class="form-control modal_text" />
+        <span class="text-danger" *ngIf="
+            rightSideGridData.controls['slugName'].dirty &&
+            rightSideGridData.hasError('required', 'slugName')
+          ">*Required</span>
+        <div class="datf" style="margin-top: 1rem">
+          <div class="date" style="margin-right: 1rem; width: 50%">
+            <p>Slug Type*:</p>
+            <select class="form-control inputData" ng-model="rightSideGridData.slugType" formControlName="slugType"
+              slugTypeData id="slugDropdown" style="width: 100%">
+              <option value="none">Choose Slug Type</option>
+              <option *ngFor="let slugtype of slugType" [value]="slugtype.value">
+                {{ slugtype.value }}
+              </option>
+            </select>
+            <!-- <span class="text-danger" *ngIf="rightSideGridData.controls['slugType'].dirty && rightSideGridData.hasError('required','slugType')">*Required</span> -->
+          </div>
+          <div class="time" style="margin-left: 1rem; width: 50%">
+            <p>AssignTo*:</p>
+            <select class="form-control inputData" formControlName="assignTo" ng-model="rightSideGridData.assignTo"
+              class="form-control inputData" style="width: 100%" style="width: 100%">
+              <option value="none">Choose Assign To</option>
+              <option *ngFor="let assign of assignTo" [value]="assign.assignto">
+                {{ assign.assignto }}
+              </option>
+            </select>
+            <!-- <span class="text-danger" *ngIf="rightSideGridData.controls['assignTo'].dirty && rightSideGridData.hasError('required','assignTo')">*Required</span> -->
+          </div>
+        </div>
+        <div class="datf" style="margin-top: 1rem">
+          <div class="date" style="width: 100%">
+            <p>Create Date*:</p>
+            <input [value]="currentDate" formControlName="createDate" class="form-control" type="text" readonly />
+            <input type="hidden" formControlName="rundownId" />
+          </div>
+        </div>
+        <div class="datf" style="margin-top: 1rem" [ngClass]="
+            recurrenceCheck == 'YES' ? 'recurrenceShow' : 'diplayHidden'
+          ">
+          <div class="date" style="width: 100%">
+            <h5 style="float: right; color: #00a6f4">Recurrence</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="closeButton" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button (click)="buttonClicked()" id="rightSideCLose" type="button" class="btn btn-primary"
+          [disabled]="rightSideGridData.invalid" *ngIf="showCreateBtn">
+          Create
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateRightSideDetails()" *ngIf="showUpdateBtn">
+          Update
+        </button>
+        <button type="button" class="btn btn-primary" (click)="insertRightSideDetails()" *ngIf="showInsertBtn">
+          Insert
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Video Attchment -->
+<div class="modal fade" id="videoAttachment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 1.1rem; font-weight: 300">
+          List of selected templates
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeSelectedGraphics()" style="display:none"></button>
+      </div>
+      <div *ngIf="videoContent" class="textContent" style="display: contents">
+        <p>No Records Found</p>
+      </div>
+      <div class="modal-body">
+        <div class="" id="accordionExample">
+          <div class="d-flex" style="height: 50%; justify-content: space-between; flex-wrap: wrap">
+            <div class="card card-video my-3 selectedGraphcs" style="width: 100%"
+              *ngFor="let videoArray of videoArray; let i = index">
+              <div class="card-body">
+                <h5>{{ videoArray.name }}</h5>
+                <p class="card-text">00:00:00:00/00:00:00:00</p>
+                <button type="button" class="btn btn-outline-light btn-sm"
+                  (click)="removeFromVideoArray(videoArray, i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-target="modal" data-bs-toggle="modal"
+          data-bs-target="#videoAdd" (click)="getVideoAssets()">
+          Add Video Tmp
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+          (click)="putVideoAssets()">
+          Save
+        </button>
+        <button class="btn btn-secondary" data-bs-target="#exampleModal1" data-bs-toggle="modal">Back to Editor</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Graphics Attachment -->
+<div class="modal fade" id="grapichsAttachment" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header" style="
+          box-shadow: 0.5px 0.9px 9px 1px rgb(26 28 29 / 30%);
+          font-weight: 300;
+          font-size: 1.1rem;
+        ">
+        <p class="modal-title" id="exampleModalLabel" style="font-weight: 300; font-size: 1.1rem">
+          List of selected templates
+        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeTemplate"
+          (click)="closeSelectedGraphics()" style="display:none"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="graphicsContent" class="textContent" style="display: contents">
+          <p>No Records Found</p>
+        </div>
+        <div class="accordion" [attr.id]="'accordionExample' + i + 1"
+          *ngFor="let graphicsTitle of graphicsValue; let i = index">
+          <div class="accordion-item">
+            <h2 class="accordion-header d-flex" id="headingOne">
+
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseOne' + i + 1" aria-expanded="true">
+                {{ graphicsTitle.title }}
+              </button>
+              <button (click)="removeGfx(graphicsTitle)" style="color:black;">X</button>
+              <input type="hidden" value="{{ graphicsTitle.title }}" [attr.id]="'titleOfgraphics' + i" />
+            </h2>
+            <div [attr.id]="'collapseOne' + i + 1" class="accordion-collapse collapse" aria-labelledby="headingOne"
+              [attr.data-bs-parent]="'#accordionExample' + i + 1">
+              <div class="accordion-body" id="accordioncol">
+                <div class="panel-collapse collapse" id="div-0" style="display: block">
+                  <div class="d-flex" style="justify-content: space-evenly">
+                    <div>
+                      <div class="d-flex" *ngFor="let item of tpArray; let itemIndex = index" style="
+                          margin: 1%;
+                          justify-content: space-evenly;
+                          width: 90%;
+                        " [ngClass]="{
+                          diplayHidden: !(
+                            graphicsTitle.templateid === item.TemplateId &&
+                            i + 1 == item.graphicsIndex
+                          )
+                        }">
+                        <div class="d-flex" style="margin-top: 5px; width: 100%">
+                          <label class="d-flex" style="
+                              margin: 1%;
+                              width: inherit;
+                              width: 100%;
+                              align-items: center;
+                            " *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              i + 1 == item.graphicsIndex
+                            ">{{ item.tpName }}</label>
+                        </div>
+                        <div class="d-flex" style="margin-top: 5px; width: 100%">
+                          <select *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              item.tpType == 'asset' &&
+                              i + 1 == item.graphicsIndex
+                            " class="fa fa-caret-down graphicsSelect modal_text ms-2 me-2" [(ngModel)]="item.tpValue"
+                            type="text" id="slugDropdown" style="margin-top: 5px"
+                            (change)="getDataOption($event, item, itemIndex)">
+                            <option *ngFor="let asset of assetsName" [value]="asset">
+                              {{ asset }}
+                            </option>
+                          </select>
+                          <input *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              item.tpType == 'text' &&
+                              item.tpName != 'Font Color' &&
+                              i + 1 == item.graphicsIndex
+                            " type="text" class="form-control modal_text ms-2 me-2" value="{{ item.tpValue }}"
+                            (change)="getDataText($event, item, itemIndex)" />
+                          <input [attr.id]="'colorId' + itemIndex" type="text" *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              item.tpName == 'Font Color' &&
+                              item.tpType == 'text' &&
+                              i + 1 == item.graphicsIndex
+                            " class="form-control modal_text ms-2 me-2" [(value)]="item.tpValue"
+                            (change)="getDataColor($event, item, itemIndex)" />
+                          <input type="color" *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              item.tpName == 'Font Color' &&
+                              i + 1 == item.graphicsIndex
+                            " id="test" class="ms-2 me-2" name="favcolor" style="margin-top: 5px"
+                            value="{{ colorData }}" (change)="graphicsColor($event, item, itemIndex)" />
+                          <input *ngIf="
+                              graphicsTitle.templateid === item.TemplateId &&
+                              item.tpType == 'int' &&
+                              i + 1 == item.graphicsIndex
+                            " type="number" class="form-control modal_text ms-2 me-2" value="{{ item.tpValue }}"
+                            (change)="getDataText($event, item, itemIndex)" />
+                        </div>
+
+                        <!-- </div> -->
+                      </div>
+                    </div>
+                    <div style="width: 50%; margin-left: 1%">
+                      <div>
+                        <p>Position</p>
+                        <div class="d-flex">
+                          <label>X</label>
+                          <input style="width: 100%; margin-bottom: 3%" placeholder="0" type="text"
+                            class="form-control modal_text ms-2 me-2" value="{{ graphicsTitle.x }}"
+                            (change)="getXvalue($event, graphicsTitle)" />
+                          <label>Y</label>
+                          <input style="width: 100%; margin-bottom: 3%" placeholder="0" type="text"
+                            class="form-control modal_text ms-2" value="{{ graphicsTitle.y }}"
+                            (change)="getYvalue($event, graphicsTitle)" />
+                        </div>
+                      </div>
+                      <div>
+                        <p>Size:</p>
+                        <div class="d-flex">
+                          <label>W</label>
+                          <input class="form-control inputData ms-2 me-2" placeholder="1920"
+                            style="width: 100%; margin-bottom: 3%" type="text" value="{{ graphicsTitle.w }}"
+                            (change)="getWvalue($event, graphicsTitle)" />
+                          <label>H</label>
+                          <input class="form-control inputData ms-2 me-2" placeholder="1080"
+                            style="width: 100%; margin-bottom: 3%" type="text" value="{{ graphicsTitle.h }}"
+                            (change)="getHvalue($event, graphicsTitle)" />
+                        </div>
+                      </div>
+                      <div class="d-flex">
+                        <div>
+                          <p>Offset Start:</p>
+                          <div>
+                            <input class="form-control inputData" value="00:00:00" placeholder="hh:mm:ss" minlength="0"
+                              maxlength="8" (input)="getOffset($event, graphicsTitle)"
+                              style="width: 100%; margin-bottom: 3%" type="text" />
+                          </div>
+                        </div>
+                        <div>
+                          <p>Offset End*</p>
+                          <div>
+                            <input (input)="getSPlDuration($event, graphicsTitle)" class="form-control inputData"
+                              minlength="0" maxlength="8" value="00:00:00" placeholder="hh:mm:ss"
+                              style="width: 100%; margin: 5%" type="text" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" *ngIf="addGfxShow" class="btn btn-secondary" data-bs-dismiss="modal"
+          data-bs-toggle="modal" (click)="addGfx()" data-bs-target="#grapichsAdd">
+          Add GFX Tmp
+        </button>
+        <button type="button" *ngIf="showGraphicsButton" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal1" (click)="setGraphics()">
+          Save
+        </button>
+        <button type="button" *ngIf="showVideoBtn" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal1" (click)="setVideoGraphics()">
+          Save Video GFX
+        </button>
+        <button class="btn btn-secondary" *ngIf="editorBack" data-bs-target="#exampleModal1" data-bs-toggle="modal">Back
+          to Editor</button>
+        <button class="btn btn-secondary" *ngIf="editorBackBtn" data-bs-target="#exampleModal1" data-bs-toggle="modal"
+          (click)="backToEditor()">Back to Editor</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add Graphics -->
+<div class="modal fade" id="grapichsAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header" style="box-shadow: 0.5px 0.9px 9px 1px rgb(26 28 29 / 30%)">
+        <h5 class="modal-title" id="grapichsAdd">Graphics Add</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeSelectedGraphics()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionExample">
+          <div class="sidebarSec2">
+            <input [(ngModel)]="graphicsSearch" type="text" class="form-control inputLeftSearcchDesg" id="leftSearch"
+              placeholder="Search for RunDown" /><span class="searchInputIcon"><i class="fa fa-search"
+                aria-hidden="true"></i></span>
+          </div>
+          <hr />
+          <div class="d-flex" style="height: 50%; justify-content: space-between; flex-wrap: wrap">
+            <div class="card my-3 selectedGraphcs" style="width: 14rem"
+              *ngFor="let graphics of graphicsCard | filter: graphicsSearch" (click)="clickGraphics($event, graphics)">
+              <img src="{{ graphics.imagepath }}" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <p class="card-text" style="color: black">
+                  {{ graphics.title }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+          data-bs-target="#grapichsAttachment">
+          back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Video -->
+<div class="modal fade" id="videoAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header" style="box-shadow: 0.5px 0.9px 9px 1px rgb(26 28 29 / 30%)">
+        <h5 class="modal-title" id="grapichsAdd">Video Add</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeSelectedGraphics()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="" id="accordionExample">
+          <div class="videoSec2">
+            <input type="text" class="form-control inputLeftSearcchDesg" id="leftSearch"
+              placeholder="Search for RunDown" /><span class="searchInputIcon"><i class="fa fa-search"
+                aria-hidden="true"></i></span>
+          </div>
+          <hr />
+          <div class="d-flex" style="height: 50%; justify-content: space-between; flex-wrap: wrap">
+            <div class="card card-video my-3 selectedGraphcs" style="width: 100%"
+              *ngFor="let videoAsset of videoAssets; let index = index" (click)="clickVideo($event, videoAsset, index)"
+              [class.videoList]="getClass(videoAsset, index)">
+              <div class="card-body">
+                <h5>{{ videoAsset.name }}</h5>
+                <p class="card-text">00:00:00:00/00:00:00:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+          data-bs-target="#videoAttachment" (click)="selectedClean()">
+          back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drop modal box -->
+<div class="modal fade" id="dropdownBasic" data-bs-backdrop="static" ngxUiLoaderBlurred tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="leftsideDrop" class="modal-dialog">
+    <div class="modal-content" style="width: 650px; height: 520px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="showCreate">
+          Rundown Draft
+        </h5>
+        <button id="closeDraftModel" type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex">
+          <div class="d-flex" style="width:100%">
+            <div style="width:100%">
+              <p>Rundown Draft*:</p>
+              <input formControlName="rundownDraft" id="inputDraft" style="width: 98%" type="text"
+                class="form-control modal_text" readonly />
+              <span class="text-danger" *ngIf="
+                  leftsideDrop.controls['rundownDraft'].dirty &&
+                  leftsideDrop.hasError('required', 'rundownDraft')
+                ">*Required</span>
+            </div>
+            <div style="width:100%">
+              <p>Group*:</p>
+              <select class="fa fa-caret-down modal_text alignRecurrence inputRecurrence" aria-hidden="true"
+                id="recurrence" formControlName="pkg" aria-label="Default select example">
+                <option value="select">Select Group</option>
+                <option [value]="groupName" *ngFor="let groupName of pcrName">{{groupName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <p>Rundown name*:</p>
+        <input formControlName="runDownName" id="inputRundown" style="width: 98%" type="text"
+          class="form-control modal_text" />
+        <span class="text-danger" *ngIf="
+            leftsideDrop.controls['runDownName'].dirty &&
+            leftsideDrop.hasError('required', 'runDownName')
+          ">*Required</span>
+
+        <div class="datf" style="margin-top: 1rem">
+          <div class="date" style="margin-right: 1rem; width: 50%">
+            <p>Date*:</p>
+            <input formControlName="rundownDate" min="{{ recurrStartDate }}" max="{{ recurrEndDate }}"
+              ng-model="leftsideDrop.rundownDate" class="form-control inputData" type="date" id="draftDate" />
+          </div>
+          <div class="time" style="margin-left: 1rem; width: 50%">
+            <p>Time*:</p>
+            <input formControlName="rundownCreationTime" minlength="0" maxlength="8" (input)="flexibleTime($event)"
+              class="form-control inputData" type="text" />
+          </div>
+        </div>
+        <div class="datf" style="margin-top: 1rem">
+          <div style="width: 100%">
+            <p>Rundown Remarks*:</p>
+            <input formControlName="rundownRemarks" id="rundownRemarks" style="width: 98%" type="text"
+              class="form-control modal_text" />
+            <span class="text-danger" *ngIf="
+                leftsideDrop.controls['rundownRemarks'].dirty &&
+                leftsideDrop.hasError('required', 'rundownRemarks')
+              ">*Required</span>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" formControlName="rundownTime" class="type" />
+      <input type="hidden" formControlName="rundownStatus" class="type" />
+      <input type="hidden" formControlName="runDownId" class="type" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="leftsideDraft()" [disabled]="leftsideDrop.invalid">
+          Create
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

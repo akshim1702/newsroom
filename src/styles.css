@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --themeColor: #141414;
+    --color1: white;
+    --button-color3: black;
+    --tableHeaderBackgroundColor: #191a1a;
+    --tableHeaderColor: white;
+    --table-row-hover-color: #36393a;
+    --tr-border: #141414;
+    --tr-container: #141414;
+    --button-color: #bdc0c0;
+    --button-color2: white;
+    --input-color: black;
+    --leftsidePopup: linear-gradient(to top, #3a3d3e 0%, #414546);
+    --leftsideSearchColor: white;
+    --leftsideSearch: #36393a;
+    --leftsideGridColor: white;
+    --leftsideGrid: #36393a;
+    --headerNavbar: #191a1a;
+    --editorColor: #36393a;
+    --paginationColor: #cacacad9;
+    --headerPrompter: #36393a;
+    --header: #fff;
+    --tableHead:#3b3f40;
+}
+
+body {
+    background-color: #141414;
+    overflow: hidden;
+}

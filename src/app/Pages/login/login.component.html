@@ -1,0 +1,51 @@
+<div class="card" *ngIf="showSelection" >
+  <div class="card-body">
+    <h4 class="card-title" style="text-align: center; color: #00a6f4; margin-top: 5%;">NEWS ROOM</h4>
+    <div style="text-align: center;">
+      
+      <div style="text-align: center;">
+          <h3 for="exampleInputEmail1" class="form-label"  style="height: 55px; width: 42%;font-weight: 100; margin-bottom: -15px;">Tenant</h3>
+      <select  (change)="onSelect($event)" style="height: 55px;width: 70%">
+        <option value="">Select organization....</option>
+        <option *ngFor="let organization of data " value= {{organization.id}}>{{organization.organisationName}}</option>
+      </select>
+      </div>
+      <div style="text-align: center;">
+      <select  (change)="onChange($event)" style="height: 55px;width: 70%;height: 35vx; margin-top:8%;">
+        <option value="">Select channel....</option>
+        <option *ngFor="let channel of displayChannl" [value]= "channel ">{{channel}}</option>
+      </select>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" style="text-align: center;margin-left:35%;margin-top: 8%; width:30%" *ngIf="proceedHide" (click)="proceed()">Proceed</button>
+
+  </div>
+  </div>
+
+<div class="card" *ngIf="showLogin">
+  <div class="card-body">
+    <h4 class="card-title" style="text-align: center; color: #00a6f4;">NEWS ROOM</h4>
+    <form [formGroup]="Login" (ngSubmit)="ProceedLogin()">
+      <div class="mb-3" style="margin: 1% 25%;">
+        <label for="exampleInputEmail1" class="form-label">Email ID</label>
+        <input style=" width: 100%;" [(ngModel)]="username" type="email" class="form-control inputTag" formControlName="username"
+          id="exampleInputEmail1" placeholder="Email Address" aria-describedby="emailHelp">
+        <span class="text-danger"
+          *ngIf="Login.controls['username'].dirty && Login.hasError('required','username')">*Required</span>
+      </div>
+      <div class="mb-3" style="  margin: 1% 25%;">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" style="width: 100%;" [(ngModel)]="password" formControlName="password" placeholder="Password"
+          class="form-control inputTag" id="exampleInputPassword1">
+        <span class="text-danger"
+          *ngIf="Login.controls['password'].dirty && Login.hasError('required','password')">*Required</span>
+
+      </div>
+      <div style="text-align: center;">
+        <h3 class="forgot">Forgot Password?</h3>
+        <button [disabled]="!Login.valid" type="submit" class="btn btn-primary login"
+          style="text-align: center; background-color: #33a4d9;">Login</button>
+      </div>
+    </form>
+  </div>
+  <!-- Selection -->
